@@ -2,7 +2,7 @@
 <div class="banner">
     <div class="swiper-container">
         <div class="swiper-wrapper">
-            <div class="swiper-slide" v-for="(item,index) in banner" :key="index">
+            <div class="swiper-slide" v-for="(item,index) in banner" :key="index" @click="$router.push(`${path}/${id[index]}`)">
                 <a @click.prevent href="">
                     <img :src="item" alt="">
                 </a>
@@ -26,23 +26,33 @@ import 'swiper/swiper-bundle.min.css';
 export default {
     name: 'Banner',
     props: {
-        banner: Array
+        banner: Array,
+        id: Array,
+        path: String
     },
     mounted() {
-        new Swiper('.swiper-container', {
-            loop: true,
-            paginationClickable: true,
-            pagination: {
-                el: '.swiper-pagination',
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            autoplay: {
-                delay: 1000, //1秒切换一次
-            },
-        })
+        setTimeout(() => {
+            this.$nextTick(() => {
+                new Swiper('.swiper-container', {
+                    loop: true,
+                    paginationClickable: true,
+                    pagination: {
+                        el: '.swiper-pagination',
+                    },
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                    autoplay: {
+                        delay: 1000, //1秒切换一次
+                    },
+                })
+            })
+        }, 2000)
+
+    },
+    methods: {
+
     }
 }
 </script>

@@ -13,7 +13,17 @@ function resolve(dir) {
 module.exports = {
     lintOnSave: false,
     devServer: {
-        open: true
+        open: true,
+        proxy:{
+            '/api':{
+                target:'http://h5.jingcaicheshi.com',
+                ws: false,
+                changeOrigin: true,
+                pathRewrite: {
+                    '^/api': ''
+                }
+            }
+        }
     },
     css: {
         loaderOptions: {
@@ -29,6 +39,7 @@ module.exports = {
             .set('@', resolve('./src'))
             .set('components', resolve('./src/components'))
             //set第一个参数：设置的别名，第二个参数：设置的路径
-            　　　　
-    }
+            　　
+    },
+    
 }

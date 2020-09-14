@@ -1,6 +1,9 @@
 <template>
-<div>
+<div id="personal">
     <button @click="$router.push('/home')">去首页</button>
+    <div class="personal-header">
+        <div></div>
+    </div>
 </div>
 </template>
 
@@ -10,6 +13,10 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="less">
+#app {
+    .app-content {
+        margin-top: 10px;
+    }
+}
 </style>

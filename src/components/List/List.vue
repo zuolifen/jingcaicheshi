@@ -1,7 +1,7 @@
 <template>
 <div class="list">
 
-    <div class="list-item" v-for="(item,index) in List" :key="index">
+    <div class="list-item" v-for="(item,index) in List" :key="index" @click="$router.push(`${path}/${id[index]}`)">
         <span class="dot"></span>
         <span class="text">{{item}}</span>
     </div>
@@ -12,7 +12,9 @@
 export default {
     name: 'List',
     props: {
-        List: Array
+        List: Array,
+        id: Array,
+        path: String
     }
 }
 </script>

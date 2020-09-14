@@ -2,9 +2,11 @@
 <div id="header-wap">
     <div class="header">
         <div class="header-left">
-            <span>全国</span>
-            <span class="line">|</span>
-            <span>切换</span>
+            <div class="city"><img src="../../static/image/timg.jpg" alt=""></div>
+            <el-select class="select" v-model="cityName" filterable placeholder="全国">
+                <el-option v-for="item in cityList" :key="item.city_name" :label="item.city_name" :value="item.city_name">
+                </el-option>
+            </el-select>
         </div>
         <h1 class="header-content">
             <div class="logo-a" @click="$router.push('/home')">
@@ -37,10 +39,24 @@ export default {
     name: 'Header',
     data() {
         return {
-
+            cityList: [],
+            cityName: ''
         }
     },
+    mounted() {
+        this.changeCity()
+    },
+    methods: {
+        async changeCity() {
+            const result = await this.$http.home.getCityInfo();
+            if (result.code === 200) {
+                console.log(result)
 
+                this.cityList = result.data
+            }
+
+        }
+    }
 }
 </script>
 
@@ -58,8 +74,26 @@ export default {
         margin-bottom: 16px;
 
         .header-left {
-            .line {
-                margin: 0 10px;
+            width: 140px;
+            display: flex;
+
+            .city {
+                img {
+                    width: 30px;
+                    height: 30px;
+                }
+
+                margin-right: 2px;
+            }
+
+            .el-input__inner {
+                color: #000;
+                border: none;
+                padding: 0;
+            }
+
+            .el-input__inner::placeholder {
+                color: #000;
             }
         }
 
